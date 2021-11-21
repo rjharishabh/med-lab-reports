@@ -43,3 +43,13 @@ INSERT INTO tests(test_code,test_name,fee,bio_ref_interval,units) VALUES ('PC', 
 INSERT INTO tests(test_code,test_name,fee,bio_ref_interval,units) VALUES ('TC', 'Total Cholesterol', 100, '<200.00', 'mg/dL');
 INSERT INTO tests(test_code,test_name,fee,bio_ref_interval,units) VALUES ('HDLC', 'HDL Cholesterol', 80, '>40.00', 'mg/dL');
 INSERT INTO tests(test_code,test_name,fee,bio_ref_interval,units) VALUES ('LDLC', 'LDL Cholesterol', 50, '<100.00', 'mg/dL');
+
+CREATE TABLE tests_conducted (
+  test_no INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  test_id INTEGER NOT NULL,
+  date_and_time DATETIME NOT NULL,
+  results VARCHAR(8) NOT NULL,
+  CONSTRAINT FOREIGN KEY (user_id) REFERENCES users (uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FOREIGN KEY (test_id) REFERENCES tests (tid) ON DELETE CASCADE ON UPDATE CASCADE
+);
