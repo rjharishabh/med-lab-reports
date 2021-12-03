@@ -26,6 +26,16 @@ session_start()
                         <h4 class="mt-3">Forgot Password</h4>
                       <div class="card-body">
                           <form action="db/forgot.php" method="post">
+                              <div class="row">
+                                  <?php
+                                  if (isset($_SESSION['error'])) {
+                                    echo ("<div class='alert text-center alert-danger alert-dismissible fade show' role='alert'>
+                        <strong>".$_SESSION['error']."</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                          <span aria-hidden='true'>&times;</span></button></div>");
+                                    unset($_SESSION['error']);
+                                  }
+                                  ?>
+                              </div>
                               <div class="row m-3">
                                   <div class="col-4">
                                       <label for="email" class="form-label"><h5>Email</h5></label>

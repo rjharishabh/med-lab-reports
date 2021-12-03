@@ -1,6 +1,7 @@
 <?php
 session_start()
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -14,6 +15,7 @@ session_start()
         <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
         <link rel="manifest" href="site.webmanifest">
         <title>Change Password</title>
+        <script src="js/script.js" defer></script>
     </head>
     <body>
         <main class="container">

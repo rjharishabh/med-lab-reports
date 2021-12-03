@@ -14,7 +14,9 @@ $login->execute(array(
 $row=$login->fetch(PDO::FETCH_ASSOC);
 
 if ($row===false) {
-    echo "Incorrect Username or Password";
+    $_SESSION['error'] = "Incorrect Username or Password";
+    header('Location:/medical-test-and-report-management-system/');
+    return;
 }
 else {
     $obj=(object)['id'=>$row['id'],'token'=>$row['token']];
@@ -22,4 +24,5 @@ else {
     setcookie('login',$json);
 
     header('Location:/medical-test-and-report-management-system/dashboard.php');
+    return;
 }

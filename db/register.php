@@ -34,11 +34,16 @@ if($row===false){
         setcookie('login',$json);
 
         header('Location:/medical-test-and-report-management-system/dashboard.php');
+        return;
     }
     else {
-        echo "Password and confirm password should be same";
+        $_SESSION['error'] = "Password and confirm password should be same <br>Please try to register again.";
+        header('Location:/medical-test-and-report-management-system/');
+        return;
     }
 }
 else {
-        echo "Email already exists";
+    $_SESSION['error'] = "Email already exists <br>Please try to register again.";
+    header('Location:/medical-test-and-report-management-system/');
+    return;
 }
