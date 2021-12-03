@@ -1,24 +1,69 @@
-const regBtn=document.querySelector("[data-bs-target='#register']");
-const lgnBtn=document.querySelector("[data-bs-target='#login']");
-const login=document.getElementById('login');
-const register=document.getElementById('register');
+if (document.getElementById('otpbtn')) {
+    document.getElementById('otpbtn').addEventListener('click',()=>{
+        const email = document.getElementById("email").value;
+        if (email === '' || email.indexOf('@')===-1) {
+            alert('Please enter a valid email.')
+        }
+        else {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById('resText').innerHTML = this.responseText;
+                console.log('OTP sent successfully');
+            }
+           xhttp.open("POST", "db/forgot.php?email="+email, true);
+           xhttp.send(email);
+           document.getElementById('otp-block').style.display='block';
+        }
+    });
+}
 
-regBtn.addEventListener('click',()=>{
-    login.classList.remove('show');
-    regBtn.classList.remove('btn-info');
-    regBtn.classList.add('btn-secondary');
-    regBtn.setAttribute('disabled',true);
-    lgnBtn.removeAttribute('disabled');
-    lgnBtn.classList.remove('btn-secondary');
-    lgnBtn.classList.add('btn-info');
-});
+if(document.querySelector('#view-password')) {
+    document.querySelector('#view-password').addEventListener('click', () => {
+        let p = document.querySelector('#login-eye');
+        let pass = document.querySelector('#lgnpassword');
+        if(pass.type==='password') {
+            p.removeAttribute('src');
+            p.setAttribute('src','imgs/icons/eye-fill.svg');
+            pass.type='text';
+        }
+        else if(pass.type==='text') {
+            p.removeAttribute('src');
+            p.setAttribute('src','imgs/icons/eye-slash-fill.svg');
+            pass.type='password';
+        }
+    });
+}
 
-lgnBtn.addEventListener('click',()=>{
-    register.classList.remove('show');
-    lgnBtn.classList.remove('btn-info');
-    lgnBtn.classList.add('btn-secondary');
-    lgnBtn.setAttribute('disabled',true);
-    regBtn.removeAttribute('disabled');
-    regBtn.classList.remove('btn-secondary');
-    regBtn.classList.add('btn-info');
-});
+if(document.querySelector('#view-password-reg')) {
+    document.querySelector('#view-password-reg').addEventListener('click', () => {
+        let p = document.querySelector('#login-eye-pass');
+        let pass = document.querySelector('#regpassword');
+        if(pass.type==='password') {
+            p.removeAttribute('src');
+            p.setAttribute('src','imgs/icons/eye-fill.svg');
+            pass.type='text';
+        }
+        else if(pass.type==='text') {
+            p.removeAttribute('src');
+            p.setAttribute('src','imgs/icons/eye-slash-fill.svg');
+            pass.type='password';
+        }
+    });
+}
+
+if(document.querySelector('#view-cpassword-reg')) {
+    document.querySelector('#view-cpassword-reg').addEventListener('click', () => {
+        let p = document.querySelector('#login-eye-cpass');
+        let pass = document.querySelector('#confpassword');
+        if(pass.type==='password') {
+            p.removeAttribute('src');
+            p.setAttribute('src','imgs/icons/eye-fill.svg');
+            pass.type='text';
+        }
+        else if(pass.type==='text') {
+            p.removeAttribute('src');
+            p.setAttribute('src','imgs/icons/eye-slash-fill.svg');
+            pass.type='password';
+        }
+    });
+}

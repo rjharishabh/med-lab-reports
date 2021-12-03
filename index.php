@@ -10,6 +10,7 @@ session_start();
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<link rel="stylesheet" href="css/bootstrap.min.css">
     	<link rel="stylesheet" href="css/styles.css">
+        <link rel="icon" type="image/ico" href="imgs/favicon/favicon.ico">
     	<link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png">
     	<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png">
     	<link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
@@ -32,13 +33,23 @@ session_start();
                           </ul>
                           <div class="tab-content">
                             <div class="tab-pane fade show active" id="login">
-                                <h2 class="text-center">Login</h2>
+                                <h2 class="text-center m-3">Login</h2>
+                                <?php
+                                if(isset($_SESSION['error'])){
+                                  echo ('<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                      <strong>'.$_SESSION["error"].'</strong><button type="button" class="btn-close"
+                      data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                                  unset($_SESSION['error']);
+                                }
+                                ?>
                                 <form action="db/login.php" method="post">
+                                    <div class="row">
+                                    </div>
                                     <div class="row m-3">
                                         <div class="col-4">
                                             <label for="lgnemail" class="form-label"><h5>Email</h5></label>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-7">
                                             <input type="email" name="email" id="lgnemail" class="form-control" required placeholder="user@example.com">
                                         </div>
                                     </div>
@@ -46,39 +57,53 @@ session_start();
                                         <div class="col-4">
                                             <label for="lgnpassword" class="form-label"><h5>Password</h5></label>
                                         </div>
-                                        <div class="col-8">
-                                            <input type="password" id="lgnpassword" class="form-control" required name="password">
+                                        <div class="col-7">
+                                            <input type="password" minlength="6" maxlength="12" id="lgnpassword" class="form-control" required name="password">
                                         </div>
+                                        <div class="col-1" id="view-password">
+                                            <img id="login-eye" src="imgs/icons/eye-slash-fill.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <a href="forgot-password.php" class="link-primary offset-9 col-3 text-end text-decoration-none">Forgot Password</a>
                                     </div>
                                     <button type="submit" class="btn btn-info btn-lg" name="button">Login</button>
                                 </form>
                           </div>
 
                             <div class="tab-pane fade" id="register">
-                                <h2 class="text-center">Register</h2>
+                                <h2 class="text-center m-3">Register</h2>
                                 <form action="db/register.php" method="post">
+                                    <div class="row">
+                                    </div>
                                     <div class="row m-3">
                                         <div class="col-4">
                                             <label for="email" class="form-label"><h5>Email</h5></label>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-7">
                                             <input type="email" name="email" id="email" class="form-control" required placeholder="user@example.com">
                                         </div>
                                     </div>
                                     <div class="row m-3">
                                         <div class="col-4">
-                                            <label for="password" class="form-label"><h5>Password</h5></label>
+                                            <label for="regpassword" class="form-label"><h5>Password</h5></label>
                                         </div>
-                                        <div class="col-8">
-                                            <input type="password" class="form-control" id="password" required name="password">
+                                        <div class="col-7">
+                                            <input type="password" minlength="6" maxlength="12" class="form-control" id="regpassword" required name="password">
+                                        </div>
+                                        <div class="col-1" id="view-password-reg">
+                                            <img id="login-eye-pass" src="imgs/icons/eye-slash-fill.svg" alt="">
                                         </div>
                                     </div>
                                     <div class="row m-3">
                                         <div class="col-4">
                                             <label for="confpassword" class="fomr-label"><h5>Confirm Password</h5></label>
                                         </div>
-                                        <div class="col-8">
-                                            <input type="password" class="form-control" id="confpassword" required name="confpassword">
+                                        <div class="col-7">
+                                            <input type="password" minlength="6" maxlength="12" class="form-control" id="confpassword" required name="confpassword">
+                                        </div>
+                                        <div class="col-1" id="view-cpassword-reg">
+                                            <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-info btn-lg" name="button">Continue</button>
@@ -90,6 +115,7 @@ session_start();
                 </div>
             </div>
         </main>
+        <script src="js/script.js"></script>
         <script src="js/bootstrap.bundle.min.js" ></script>
     </body>
 </html>
