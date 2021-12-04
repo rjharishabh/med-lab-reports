@@ -19,10 +19,7 @@ if ($row===false) {
     return;
 }
 else {
-    $obj=(object)['id'=>$row['id'],'token'=>$row['token']];
-    $json=json_encode($obj);
-    setcookie('login',$json);
-
+	$_SESSION['authid'] = $row['id'];
     header('Location:/medical-test-and-report-management-system/dashboard.php');
     return;
 }

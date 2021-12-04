@@ -13,11 +13,10 @@ if($row===false){
 
     if ($_POST['password']===$_POST['confpassword']) {
         $salt='salt';
-        $sql='INSERT INTO auth(email,password,token) VALUES(:email,:password,:token)';
+        $sql='INSERT INTO auth(email,password) VALUES(:email,:password)';
         $reg=$db->prepare($sql);
         $p=$reg->execute(array(':email'=>$_POST['email'],
-        ':password'=>hash('sha256',$_POST['password'].$salt),
-        ':token'=>hash('sha256',uniqid())
+        ':password'=>hash('sha256',$_POST['password'].$salt)
         ));
 
         $sql='SELECT * FROM auth WHERE email=:email AND password=:password';
@@ -29,12 +28,13 @@ if($row===false){
 
         $row=$login->fetch(PDO::FETCH_ASSOC);
 
-        $obj=(object)['id'=>$row['id'],'token'=>$row['token']];
-        $json=json_encode($obj);
-        setcookie('login',$json);
-
         $_SESSION['authid'] = $row['id'];
-        header('Location:/medical-test-and-report-management-system/dashboard.php');
+
+		$sql='INSERT INTO users (uid) VALUES(:uid)';
+		$query=$db->prepare($sql);
+		$query->execute(array(':uid'=>$_SESSION['authid']));
+
+        header('Location:/medical-test-and-report-management-system/edit-profile.php');
         return;
     }
     else {
