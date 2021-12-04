@@ -33,6 +33,7 @@ if($row===false){
         $json=json_encode($obj);
         setcookie('login',$json);
 
+        $_SESSION['authid'] = $row['id'];
         header('Location:/medical-test-and-report-management-system/dashboard.php');
         return;
     }

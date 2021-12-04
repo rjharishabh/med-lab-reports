@@ -43,8 +43,6 @@ session_start();
                                 }
                                 ?>
                                 <form action="db/login.php" method="post">
-                                    <div class="row">
-                                    </div>
                                     <div class="row m-3">
                                         <div class="col-4">
                                             <label for="lgnemail" class="form-label"><h5>Email</h5></label>
@@ -74,8 +72,6 @@ session_start();
                             <div class="tab-pane fade" id="register">
                                 <h2 class="text-center m-3">Register</h2>
                                 <form action="db/register.php" method="post">
-                                    <div class="row">
-                                    </div>
                                     <div class="row m-3">
                                         <div class="col-4">
                                             <label for="email" class="form-label"><h5>Email</h5></label>
