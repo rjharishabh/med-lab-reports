@@ -14,7 +14,7 @@ $login->execute(array(
 $row=$login->fetch(PDO::FETCH_ASSOC);
 
 if ($row===false) {
-    $_SESSION['error'] = "Incorrect Username or Password";
+    $_SESSION['error'] = "Incorrect Email or Password";
     header('Location:/medical-test-and-report-management-system/');
     return;
 }

@@ -34,8 +34,9 @@ if($row===false){
 		$query=$db->prepare($sql);
 		$query->execute(array(':uid'=>$_SESSION['authid']));
 
-        header('Location:/medical-test-and-report-management-system/edit-profile.php');
-        return;
+		$_SESSION['success'] = "Please complete your profile";
+		header('Location:/medical-test-and-report-management-system/edit-profile.php');
+		return;
     }
     else {
         $_SESSION['error'] = "Password and confirm password should be same <br>Please try to register again.";
@@ -44,7 +45,7 @@ if($row===false){
     }
 }
 else {
-    $_SESSION['error'] = "Email already exists <br>Please try to register again.";
+    $_SESSION['error'] = "Email already exists <br>Please register with different email.";
     header('Location:/medical-test-and-report-management-system/');
     return;
 }

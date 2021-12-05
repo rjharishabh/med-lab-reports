@@ -11,9 +11,9 @@ CREATE TABLE users (
   name VARCHAR(128),
   dob VARCHAR(10),
   age INTEGER,
-  gender ENUM('M','F','N'),
+  gender ENUM("Male","Female","Transgender"),
   mobile VARCHAR(10),
-  address VARCHAR(256)
+  address VARCHAR(256),
   CONSTRAINT FOREIGN KEY (uid) REFERENCES auth (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
