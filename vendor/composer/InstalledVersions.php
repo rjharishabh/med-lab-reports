@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '51125574d887a9cb9744485050de7f9294582fa1',
+    'reference' => '01c976804c58ec93de80567f271bc9f5c2fdb37f',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '51125574d887a9cb9744485050de7f9294582fa1',
+      'reference' => '01c976804c58ec93de80567f271bc9f5c2fdb37f',
     ),
     'dompdf/dompdf' => 
     array (
@@ -70,6 +70,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f627771eb854aa7f45f80add0f23c6c4d67ea0f2',
+    ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.5.3',
+      'version' => '6.5.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'baeb7cde6b60b1286912690ab0693c7789a31e71',
     ),
     'sabberworm/php-css-parser' => 
     array (
