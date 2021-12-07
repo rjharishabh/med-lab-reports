@@ -27,11 +27,11 @@ session_start()
                       <div class="card-body">
                           <form action="db/forgot.php" method="post">
                               <div class="row">
-                                  <?php
-                                  if (isset($_SESSION['error'])) {
-                                    echo ("<div class='alert text-center alert-danger alert-dismissible fade show' role='alert'>
-                        <strong>".$_SESSION['error']."</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                          <span aria-hidden='true'>&times;</span></button></div>");
+								  <?php
+                                  if(isset($_SESSION['error'])){
+                                    echo ('<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                        <strong>'.$_SESSION["error"].'</strong><button type="button" class="btn-close"
+                        data-bs-dismiss="alert" aria-label="Close"></button></div>');
                                     unset($_SESSION['error']);
                                   }
                                   ?>
@@ -45,10 +45,10 @@ session_start()
                                   </div>
                               </div>
                               <button type="button" class="btn btn-primary" id="otpbtn">Get OTP on Email</button>
-                              <div id="otp-block">
-                                  <div class="row m-3">
-                                      <p class="fs-4 text-primary">Please enter the 6 digit OTP you have received on <span class="fw-bold" id="resText"></span></p>
-                                  </div>
+							  <div class="row m-3">
+								  <p id="resText" class="fs-5 text-primary"></p>
+							  </div>
+							  <div id="otp-block">
                                   <div class="row m-3">
                                       <div class="col-4">
                                           <label for="otp" class="form-label"><h5>Enter OTP</h5></label>
@@ -66,5 +66,6 @@ session_start()
                 </div>
             </div>
         </main>
+		<script src="js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

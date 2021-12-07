@@ -15,7 +15,6 @@ session_start()
         <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
         <link rel="manifest" href="site.webmanifest">
         <title>Change Password</title>
-        <script src="js/script.js" defer></script>
     </head>
     <body>
         <main class="container">
@@ -24,22 +23,36 @@ session_start()
                     <div class="card border-primary text-center">
                         <h4 class="mt-3">Change Password</h4>
                       <div class="card-body">
-                          <form action="db/forgot.php" method="post">
+						  <?php
+						  if(isset($_SESSION['error'])){
+							echo ('<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+				<strong>'.$_SESSION["error"].'</strong><button type="button" class="btn-close"
+				data-bs-dismiss="alert" aria-label="Close"></button></div>');
+							unset($_SESSION['error']);
+						  }
+						  ?>
+                          <form action="db/update-password.php" method="post">
                               <div class="row m-3">
-                                  <div class="col-4">
-                                      <label for="newpass" class="form-label"><h5>New Password</h5></label>
+								  <div class="col-4">
+                                      <label for="regpassword" class="form-label"><h5>New Password</h5></label>
                                   </div>
-                                  <div class="col-8">
-                                      <input type="password" minlength="6" maxlength="12" name="newpass" id="newpass" class="form-control" required>
+                                  <div class="col-7">
+                                      <input type="password" minlength="6" maxlength="12" name="newpass" id="regpassword" class="form-control" required>
                                   </div>
+								  <div class="col-1" id="view-password-reg">
+									  <img id="login-eye-pass" src="imgs/icons/eye-slash-fill.svg" alt="">
+								  </div>
                               </div>
                               <div class="row m-3">
                                   <div class="col-4">
-                                      <label for="confpass" class="form-label"><h5>Confirm Password</h5></label>
+                                      <label for="confpassword" class="form-label"><h5>Confirm Password</h5></label>
                                   </div>
-                                  <div class="col-8">
-                                      <input type="password" minlength="6" maxlength="12" name="confpass" id="confpass" class="form-control" required>
+                                  <div class="col-7">
+                                      <input type="password" minlength="6" maxlength="12" name="confpass" id="confpassword" class="form-control" required>
                                   </div>
+								  <div class="col-1" id="view-cpassword-reg">
+									  <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="">
+								  </div>
                               </div>
                                   <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
                           </form>
@@ -48,5 +61,7 @@ session_start()
                 </div>
             </div>
         </main>
+		<script src="js/script.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
