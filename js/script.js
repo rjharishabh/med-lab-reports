@@ -7,12 +7,22 @@ if (document.getElementById('otpbtn')) {
         else {
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
-                document.getElementById('resText').innerHTML = this.responseText;
-                console.log('OTP sent successfully');
+				// console.log(this.responseText);
+				if (this.responseText === 'Email not found') {
+					window.location='/medical-test-and-report-management-system/forgot-password.php';
+				} else if (this.responseText === 'OTP could not be sent.') {
+					console.log('OTP could not be sent.');
+					document.getElementById('resText').innerHTML = this.responseText + '<br> Get OTP again.';
+					document.getElementById('resText').style.display='block';
+				} else {
+					console.log('OTP sent successfully');
+					document.getElementById('resText').innerHTML = this.responseText;
+					document.getElementById('resText').style.display='block';
+					document.getElementById('otp-block').style.display='block';
+				}
             }
            xhttp.open("POST", "db/forgot.php?email="+email, true);
-           xhttp.send(email);
-           document.getElementById('otp-block').style.display='block';
+           xhttp.send();
         }
     });
 }
@@ -42,6 +52,7 @@ if(document.querySelector('#view-password-reg')) {
             p.removeAttribute('src');
             p.setAttribute('src','imgs/icons/eye-fill.svg');
             pass.type='text';
+			console.log('hi');
         }
         else if(pass.type==='text') {
             p.removeAttribute('src');

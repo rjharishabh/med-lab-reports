@@ -35,12 +35,18 @@ session_start();
                             <div class="tab-pane fade show active" id="login">
                                 <h2 class="text-center m-3">Login</h2>
                                 <?php
-                                if(isset($_SESSION['error'])){
-                                  echo ('<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
-                      <strong>'.$_SESSION["error"].'</strong><button type="button" class="btn-close"
-                      data-bs-dismiss="alert" aria-label="Close"></button></div>');
-                                  unset($_SESSION['error']);
-                                }
+								if (isset($_SESSION['error'])) {
+									echo ('<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+									<strong>'.$_SESSION["error"].'</strong><button type="button" class="btn-close"
+									data-bs-dismiss="alert" aria-label="Close"></button></div>');
+									unset($_SESSION['error']);
+								}
+								if (isset($_SESSION['success'])) {
+									echo ('<div class="alert text-center alert-success alert-dismissible fade show" role="alert">
+									<strong>'.$_SESSION["success"].'</strong><button type="button" class="btn-close"
+									data-bs-dismiss="alert" aria-label="Close"></button></div>');
+									unset($_SESSION['success']);
+								}
                                 ?>
                                 <form action="db/login.php" method="post">
                                     <div class="row m-3">
