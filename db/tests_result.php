@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($_SESSION['tid'])) {
+	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	return;
+}
+
 function test_results($tid) {
 	switch ($tid) {
 		case 1:

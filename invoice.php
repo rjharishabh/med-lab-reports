@@ -6,6 +6,11 @@ require 'vendor/autoload.php';
 
 use Dompdf\Dompdf;
 
+if (!isset($_SESSION['tid'])) {
+	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	return;
+}
+
 $sql_d='SELECT email, name, age, gender, mobile, address FROM auth,users WHERE auth.id=users.uid and auth.id=:authid';
 $det=$db->prepare($sql_d);
 $det->execute(array(':authid' => $_SESSION['authid']));

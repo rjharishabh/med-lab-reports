@@ -1,5 +1,11 @@
 <?php
-session_start()
+session_start();
+
+if (!isset($_SESSION['email'])) {
+	header('Location:/medical-test-and-report-management-system/');
+	return;
+}
+
 ?>
 
 <!DOCTYPE html>

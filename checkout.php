@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_POST['tid'])) {
+	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	return;
+}
+
 require_once 'db/connect_db.php';
 
 $sql_d='SELECT email, name, age, gender, mobile, address FROM auth,users WHERE auth.id=users.uid and auth.id=:authid';

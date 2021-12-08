@@ -3,7 +3,13 @@ session_start();
 
 require_once 'db/connect_db.php';
 require 'vendor/autoload.php';
+
 use Dompdf\Dompdf;
+
+if (!isset($_POST['tid'])) {
+	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	return;
+}
 
 $sql = 'SELECT * FROM auth, users, tests, tests_conducted WHERE
 	auth.id=users.uid AND tests.tid=tests_conducted.test_id AND

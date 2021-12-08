@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['authid'])) {
+	header('Location:/medical-test-and-report-management-system/');
+	return;
+}
+
 require 'db/connect_db.php';
 
 $sql='SELECT * FROM auth,users WHERE auth.id=users.uid AND auth.id=:id';

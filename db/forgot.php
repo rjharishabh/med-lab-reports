@@ -12,20 +12,19 @@ if (isset($_GET['email'])) {
 
 	require_once 'connect_db.php';
 
-	$sql='SELECT email FROM auth WHERE email=:email';
-	$forg=$db->prepare($sql);
+	$sql = 'SELECT email FROM auth WHERE email=:email';
+	$forg = $db->prepare($sql);
 	$forg->execute(array(
-	    ':email'=>$email
+	    ':email' => $email
 	));
 
-	$row=$forg->fetch(PDO::FETCH_ASSOC);
+	$row = $forg->fetch(PDO::FETCH_ASSOC);
 
 	if ($row === false) {
 	    $_SESSION['error'] = 'Email not found in our database.';
 		echo 'Email not found';
 	}
 	else {
-
 		$otp = '';
 	    for($i=0; $i<6; $i++) {
 	        $otp = $otp . mt_rand(0,9);
@@ -40,19 +39,19 @@ if (isset($_GET['email'])) {
 			$mail->Host       = 'smtp.gmail.com';
 			$mail->SMTPAuth   = true;
 			$mail->Username   = 'mail@gmail.com';
-			$mail->Password   = 'gmailpassword';                             //SMTP password
-		    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-		    $mail->Port       = 465;                        //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+			$mail->Password   = 'gmailpassword';
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+			$mail->Port       = 465;
 
 		    //Recipients
-		    $mail->setFrom('mail@gmail.com');
-		    $mail->addAddress($email);     //Add a recipient
+			$mail->setFrom('mail@gmail.com');
+			$mail->addAddress($email);
 
 		    //Content
-		    $mail->isHTML(true);                                  //Set email format to HTML
+		    $mail->isHTML(true);
 		    $mail->Subject = 'OTP for Password Change';
-		    $mail->Body    = 'Hi,<br>Please use <strong>' . $otp . '</strong> as an OTP to change the password on medical-test-and-report-management-system website.'.
-			'<br>If you have not initiated the password change request, then please ignore this email.'.
+		    $mail->Body    = 'Hi,<br>Please use <strong>' . $otp . '</strong> as an OTP to change the password on medical-test-and-report-management-system website.' .
+			'<br>If you have not initiated the password change request, then please ignore this email.' .
 			'<br><br>Thank you<br>Rishabh Ranjan Jha<br>Developer of the website';
 
 		    $mail->send();
@@ -66,7 +65,7 @@ if (isset($_GET['email'])) {
 }
 
 else if (isset($_POST['otp'])) {
-    if($_POST['otp']===$_SESSION['otp']) {
+    if($_POST['otp'] === $_SESSION['otp']) {
         header('Location:/medical-test-and-report-management-system/change-password.php');
 		return;
     }

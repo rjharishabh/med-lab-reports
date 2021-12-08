@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_POST['name'])) {
+	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	return;
+}
+
 require_once 'connect_db.php';
 
 $age=0;
@@ -22,7 +27,6 @@ $query->execute(array(
 	':uid'=>$_SESSION['authid']
 ));
 
-$_SESSION['profile'] = 'Profile updated';
 header('Location:/medical-test-and-report-management-system/dashboard.php');
 return;
 

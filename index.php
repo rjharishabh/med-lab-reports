@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (isset($_SESSION['authid'])) {
+	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	return;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +26,7 @@ session_start();
     <body>
         <main class="container">
             <div class="row mt-3">
+				<h3 class="text-center text-monospace">Medical Test and Report Management System</h3>
                 <div class="col-md-6 offset-md-3">
                     <div class="card border-primary text-center">
                       <div class="card-body">
