@@ -1,3 +1,20 @@
 #otp-block, #resText {
     display: none;
 }
+.nav-link.active{
+	background-color: #20c997 !important;
+	color:#fff !important;
+}
+.nav-link:not(.active):hover{
+	border-color: #198754;
+}
+.nav-tabs .nav-link  {
+	margin: 0.25rem;
+	border-radius: 0.25rem;
+}
+.nav-tabs {
+	height: 25rem;
+	width: 290px;
+    border: 2px solid #dee2e6 !important;
+	background-color: #eff0f1 !important;
+}

@@ -31,34 +31,45 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
         <title>Dashboard</title>
     </head>
     <body>
-		<main class="fluid-container">
+		<header class="container">
+			<div class="row m-3">
+				<div class="col-3">
+					<a href="https://med-lab-reports.great-site.net/">
+					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
+				</div>
+				<div class="col-6">
+					<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+				</div>
+			</div>
+		</header>
+		<main class="container">
 			<div class="row">
-				<div class="col-md-2">
-					<div class="nav flex-column nav-tabs me-3" role="tablist">
-						<button class="nav-link active fs-5" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-selected="true">Profile</button>
-						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#tests" type="button" role="tab" aria-selected="false">Add Test</button>
-						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-selected="false">Test Reports</button>
-						<a class="m-auto text-decoration-none fs-5" href="logout.php"><img id="logout" src="imgs/icons/box-arrow-right.svg" alt=""> Log out</a>
+				<div class="col-md-3">
+					<div class="nav flex-column nav-tabs me-3 position-fixed" role="tablist">
+						<button class="nav-link active fs-5" data-bs-toggle="tab" data-bs-target="#profile" aria-selected="true">Profile</button>
+						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#tests" aria-selected="false">Add Test</button>
+						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#reports" aria-selected="false">Test Reports</button>
+						<a class="nav-link text-decoration-none fs-5 text-center mt-auto" href="logout.php"><img src="imgs/icons/box-arrow-right.svg" alt="logout"> Log out</a>
 					</div>
 				</div>
 
-				<div class="col-md-10">
+				<div class="col-md-9">
 					<div class="tab-content">
 						<div class="tab-pane fade show active" id="profile">
-							<div class="row">
-								<div class="col-md-5">
-									<h2>Hi <?=htmlentities($row['name']); ?></h2>
+							<div class="row my-3">
+								<div class="col-md-6">
+									<h3 class="font-monospace">Hi <?=htmlentities($row['name']); ?></h2>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-2">
+									<a href="edit-profile.php" class="btn btn-info">Edit Profile</a>
 								</div>
-								<div class="col-md-3">
-									<a href="delete-profile.php" class="btn btn-danger float-end">Delete Profile</a>
-									<a href="edit-profile.php" class="btn btn-warning float-end">Edit Profile</a>
+								<div class="col-md-2">
+									<a href="delete-profile.php" class="btn btn-danger">Delete Profile</a>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-4">
+							<div class="row my-2">
+								<div class="col-3">
 									<label class="form-label"><h5>Registered Email</h5></label>
 								</div>
 								<div class="col-7">
@@ -66,8 +77,8 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-4">
+							<div class="row my-2">
+								<div class="col-3">
 									<label class="form-label"><h5>Date of Birth</h5></label>
 								</div>
 								<div class="col-7">
@@ -75,8 +86,8 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-4">
+							<div class="row my-2">
+								<div class="col-3">
 									<label class="form-label"><h5>Age (in years)</h5></label>
 								</div>
 								<div class="col-7">
@@ -84,8 +95,8 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-4">
+							<div class="row my-2">
+								<div class="col-3">
 									<label class="form-label"><h5>Gender</h5></label>
 								</div>
 								<div class="col-7">
@@ -93,8 +104,8 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-4">
+							<div class="row my-2">
+								<div class="col-3">
 									<label class="form-label"><h5>Mobile Number</h5></label>
 								</div>
 								<div class="col-7">
@@ -102,8 +113,8 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-4">
+							<div class="row my-2">
+								<div class="col-3">
 									<label class="form-label"><h5>Address</h5></label>
 								</div>
 								<div class="col-7">
@@ -118,7 +129,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 							$tests=$db->prepare('SELECT * FROM tests');
 							$tests->execute();
 							$tests_row=$tests->fetchall(PDO::FETCH_ASSOC);?>
-							<div class="col-md-8">
+							<div class="col-md-10">
 								<table class="table table-striped table-bordered">
 									<thead>
 										<tr>
@@ -156,7 +167,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 							$tests->execute(array(':userid' => $_SESSION['authid']));
 							$tests_row=$tests->fetchall(PDO::FETCH_ASSOC);
 							?>
-							<div class="col-md-8">
+							<div class="col-md-10">
 								<table class="table table-striped table-bordered">
 									<thead>
 										<tr>

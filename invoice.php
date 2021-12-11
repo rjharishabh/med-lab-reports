@@ -6,7 +6,7 @@ require 'vendor/autoload.php';
 
 use Dompdf\Dompdf;
 
-if (!isset($_SESSION['tid'])) {
+if (!isset($_SESSION['tid']) && !isset($_POST['tid']) ) {
 	header('Location:/medical-test-and-report-management-system/dashboard.php');
 	return;
 }
@@ -16,9 +16,18 @@ $det=$db->prepare($sql_d);
 $det->execute(array(':authid' => $_SESSION['authid']));
 $detail=$det->fetch(PDO::FETCH_ASSOC);
 
-$sql_t='SELECT tid, test_code, test_name, fee FROM tests WHERE tid=:tid';
-$t=$db->prepare($sql_t);
-$t->execute(array(':tid' => $_SESSION['tid']));
+
+if (isset($_SESSION['tid'])) {
+	$sql_t='SELECT tid, test_code, test_name, fee FROM tests WHERE tid=:tid';
+	$t=$db->prepare($sql_t);
+	$t->execute(array(':tid' => $_SESSION['tid']));
+}
+elseif (isset($_POST['tid'])) {
+	$sql_t='SELECT tid, test_code, test_name, fee FROM tests AS t, tests_conducted AS tc WHERE tc.test_id=t.tid AND tc.test_no=:tid';
+	$t=$db->prepare($sql_t);
+	$t->execute(array(':tid' => $_POST['tid']));
+}
+
 $test=$t->fetch(PDO::FETCH_ASSOC);
 
 $date=date('Y-m-d h:i:s');
@@ -33,17 +42,20 @@ table {
 }
 .table,.table th, .table td {
   border: 1px solid black;
+  line-height: 30px;
   border-collapse: collapse;
 }
 .text-center {
 	text-align:center !important;
 }
-.text-right { text-align:right !important;
+.text-right {
+	text-align:right !important;
 }
 </style>';
 
 $html = $html . "
-<h3 class='text-center'>Invoice</h3><br>
+<h2 class='text-center'>Medical Test and Report Management System</h2>
+<h2 class='text-center'>Invoice</h2><br>
 <table>
 	<tbody>
 		<tr>

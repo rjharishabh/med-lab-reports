@@ -39,7 +39,8 @@ table {
 </style>';
 
 $html = $html . "
-<h3 class='text-center'>Test Result</h3><br>
+<h2 class='text-center'>Medical Test and Report Management System</h2>
+<h2 class='text-center'>Test Result</h2><br>
 <table>
 	<tbody>
 		<tr>

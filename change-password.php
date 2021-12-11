@@ -24,7 +24,16 @@ if (!isset($_SESSION['email'])) {
     </head>
     <body>
         <main class="container">
-            <div class="row mt-3">
+			<div class="row m-3">
+				<div class="col-3">
+					<a href="https://med-lab-reports.great-site.net/">
+					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
+				</div>
+				<div class="col-6">
+					<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+				</div>
+			</div>
+            <div class="row m-3">
                 <div class="col-md-6 offset-md-3">
                     <div class="card border-primary text-center">
                         <h4 class="mt-3">Change Password</h4>
@@ -46,7 +55,7 @@ if (!isset($_SESSION['email'])) {
                                       <input type="password" minlength="6" maxlength="12" name="newpass" id="regpassword" class="form-control" required>
                                   </div>
 								  <div class="col-1" id="view-password-reg">
-									  <img id="login-eye-pass" src="imgs/icons/eye-slash-fill.svg" alt="">
+									  <img id="login-eye-pass" src="imgs/icons/eye-slash-fill.svg" alt="regpassword">
 								  </div>
                               </div>
                               <div class="row m-3">
@@ -57,7 +66,7 @@ if (!isset($_SESSION['email'])) {
                                       <input type="password" minlength="6" maxlength="12" name="confpass" id="confpassword" class="form-control" required>
                                   </div>
 								  <div class="col-1" id="view-cpassword-reg">
-									  <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="">
+									  <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="confpassword">
 								  </div>
                               </div>
                                   <button type="submit" class="btn btn-primary btn-lg">Confirm</button>

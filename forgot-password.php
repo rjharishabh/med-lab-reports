@@ -20,7 +20,16 @@ session_start();
     </head>
     <body>
         <main class="container">
-            <div class="row mt-3">
+			<div class="row m-3">
+				<div class="col-3">
+					<a href="https://med-lab-reports.great-site.net/">
+					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
+				</div>
+				<div class="col-6">
+					<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+				</div>
+			</div>
+            <div class="row m-3">
                 <div class="col-md-6 offset-md-3">
                     <div class="card border-primary text-center">
                         <h4 class="mt-3">Forgot Password</h4>

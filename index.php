@@ -15,7 +15,6 @@ if (isset($_SESSION['authid'])) {
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<link rel="stylesheet" href="css/bootstrap.min.css">
-    	<link rel="stylesheet" href="css/styles.css">
         <link rel="icon" type="image/ico" href="imgs/favicon/favicon.ico">
     	<link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png">
     	<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png">
@@ -25,9 +24,17 @@ if (isset($_SESSION['authid'])) {
     </head>
     <body>
         <main class="container">
-            <div class="row mt-3">
-				<h3 class="text-center text-monospace">Medical Test and Report Management System</h3>
-                <div class="col-md-6 offset-md-3">
+			<div class="row m-3">
+				<div class="col-3">
+					<a href="https://med-lab-reports.great-site.net/">
+					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
+				</div>
+				<div class="col-6">
+					<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+				</div>
+			</div>
+            <div class="row m-3">
+				<div class="col-md-6 offset-md-3">
                     <div class="card border-primary text-center">
                       <div class="card-body">
                           <ul class="nav nav-pills justify-content-center" role="tablist">
@@ -72,7 +79,7 @@ if (isset($_SESSION['authid'])) {
                                             <input type="password" minlength="6" maxlength="12" id="lgnpassword" class="form-control" required name="password">
                                         </div>
                                         <div class="col-1" id="view-password">
-                                            <img id="login-eye" src="imgs/icons/eye-slash-fill.svg" alt="">
+                                            <img id="login-eye" src="imgs/icons/eye-slash-fill.svg" alt="lgnpassword">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -101,7 +108,7 @@ if (isset($_SESSION['authid'])) {
                                             <input type="password" minlength="6" maxlength="12" class="form-control" id="regpassword" required name="password">
                                         </div>
                                         <div class="col-1" id="view-password-reg">
-                                            <img id="login-eye-pass" src="imgs/icons/eye-slash-fill.svg" alt="">
+                                            <img id="login-eye-pass" src="imgs/icons/eye-slash-fill.svg" alt="regpassword">
                                         </div>
                                     </div>
                                     <div class="row m-3">
@@ -112,7 +119,7 @@ if (isset($_SESSION['authid'])) {
                                             <input type="password" minlength="6" maxlength="12" class="form-control" id="confpassword" required name="confpassword">
                                         </div>
                                         <div class="col-1" id="view-cpassword-reg">
-                                            <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="">
+                                            <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="confpassword">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-info btn-lg" name="button">Continue</button>
@@ -121,8 +128,8 @@ if (isset($_SESSION['authid'])) {
                           </div>
                       </div>
                     </div>
-                </div>
-            </div>
+				</div>
+			</div>
         </main>
         <script src="js/script.js"></script>
         <script src="js/bootstrap.bundle.min.js" ></script>

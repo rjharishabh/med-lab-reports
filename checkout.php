@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['authid'])) {
+	header('Location:/medical-test-and-report-management-system/');
+	return;
+}
+
 if (!isset($_POST['tid'])) {
 	header('Location:/medical-test-and-report-management-system/dashboard.php');
 	return;
@@ -38,69 +43,86 @@ $test=$t->fetch(PDO::FETCH_ASSOC);
 	<body>
 		<main class="container">
 			<div class="row">
-				<h3 class="text-center">Checkout</h3>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-md-6">
-					Name: <?=htmlentities($detail['name']); ?>
-				</div>
-				<div class="col-md-6">
-					Email: <?=htmlentities($detail['email']); ?>
-				</div>
-			</div>
+				<div class="col-md-8 offset-md-2">
+					<div class="row m-3">
+						<div class="col-3">
+							<a href="https://med-lab-reports.great-site.net/">
+							<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
+						</div>
+						<div class="col-6">
+							<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+						</div>
+					</div>
 
-			<div class="row">
-				<div class="col-md-6">
-					Age: <?=htmlentities($detail['age'].' Years'); ?>
-				</div>
-				<div class="col-md-6">
-					Mobile: <?=htmlentities($detail['mobile']); ?>
-				</div>
-			</div>
+					<div class="card border-primary">
+						<div class="card-header">
+							<h3 class="font-monospace text-center">Checkout</h3>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+									Name: <?=htmlentities($detail['name']); ?>
+								</div>
+								<div class="col-md-6">
+									Email: <?=htmlentities($detail['email']); ?>
+								</div>
+							</div>
 
-			<div class="row">
-				<div class="col-md-6">
-					Gender: <?=htmlentities($detail['gender']); ?>
-				</div>
-				<div class="col-md-6">
-					Date & Time: <?php echo date('Y-m-d h:i:s'); ?>
-				</div>
-			</div>
-			<br>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Test Id</th>
-						<th>Test Code</th>
-						<th>Test Name</th>
-						<th>Amount (&#8377;)</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><?=htmlentities($test['tid']); ?></td>
-						<td><?=htmlentities($test['test_code']); ?></td>
-						<td><?=htmlentities($test['test_name']); ?></td>
-						<td><?=htmlentities($test['fee']); ?></td>
-					</tr>
-					<tr>
-						<th class="text-end" colspan="3">Miscellaneous Charges</th>
-						<td>0</td>
-					</tr>
-					<tr>
-						<th class="text-end" colspan="3">Total Payable Amount</th>
-						<td><?=htmlentities($test['fee']); ?></td>
-					</tr>
-				</tbody>
-			</table>
+							<div class="row">
+								<div class="col-md-6">
+									Age: <?=htmlentities($detail['age'].' Years'); ?>
+								</div>
+								<div class="col-md-6">
+									Mobile: <?=htmlentities($detail['mobile']); ?>
+								</div>
+							</div>
 
-			<div class="row">
-				<form action="db/payment-completed.php" method="post">
-					<input type="hidden" name="tid" value="<?php echo $test['tid']; ?>" >
-					<a href="dashboard.php" class="btn btn-danger">Cancel</a>
-					<button type="submit" class="float-end btn btn-primary">Pay &#8377; <?=htmlentities($test['fee']); ?></button>
-				</form>
+							<div class="row">
+								<div class="col-md-6">
+									Gender: <?=htmlentities($detail['gender']); ?>
+								</div>
+								<div class="col-md-6">
+									Date & Time: <?php echo date('Y-m-d h:i:s'); ?>
+								</div>
+							</div>
+							<br>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Test Id</th>
+										<th>Test Code</th>
+										<th>Test Name</th>
+										<th>Amount (&#8377;)</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><?=htmlentities($test['tid']); ?></td>
+										<td><?=htmlentities($test['test_code']); ?></td>
+										<td><?=htmlentities($test['test_name']); ?></td>
+										<td><?=htmlentities($test['fee']); ?></td>
+									</tr>
+									<tr>
+										<th class="text-end" colspan="3">Miscellaneous Charges</th>
+										<td>0</td>
+									</tr>
+									<tr>
+										<th class="text-end" colspan="3">Total Payable Amount</th>
+										<td><?=htmlentities($test['fee']); ?></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="row">
+								<form action="db/payment-completed.php" method="post">
+									<input type="hidden" name="tid" value="<?php echo $test['tid']; ?>" >
+									<a href="dashboard.php" class="btn btn-danger">Cancel</a>
+									<button type="submit" class="float-end btn btn-primary">Pay &#8377; <?=htmlentities($test['fee']); ?></button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</main>
 	</body>
