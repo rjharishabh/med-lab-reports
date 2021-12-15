@@ -19,11 +19,11 @@ CREATE TABLE users (
 
 CREATE TABLE tests (
   tid INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  test_code VARCHAR(8),
-  test_name VARCHAR(64),
-  fee INTEGER,
-  bio_ref_interval VARCHAR(16),
-  units VARCHAR(8)
+  test_code VARCHAR(8) NOT NULL,
+  test_name VARCHAR(64) NOT NULL,
+  fee INTEGER NOT NULL,
+  bio_ref_interval VARCHAR(16) NOT NULL,
+  units VARCHAR(8) NOT NULL
 );
 
 INSERT INTO tests(test_code,test_name,fee,bio_ref_interval,units) VALUES ('GF', 'Glucose Fasting', 150, '70 - 100', 'mg/dL');

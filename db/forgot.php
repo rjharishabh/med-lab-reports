@@ -44,7 +44,7 @@ if (isset($_GET['email'])) {
 			$mail->Port       = 465;
 
 		    //Recipients
-			$mail->setFrom('mail@gmail.com');
+			$mail->setFrom('mail@gmail.com', 'Rishabh Ranjan Jha');
 			$mail->addAddress($email);
 
 		    //Content

@@ -47,7 +47,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 				<div class="col-md-3">
 					<div class="nav flex-column nav-tabs me-3 position-fixed" role="tablist">
 						<button class="nav-link active fs-5" data-bs-toggle="tab" data-bs-target="#profile" aria-selected="true">Profile</button>
-						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#tests" aria-selected="false">Add Test</button>
+						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#tests" aria-selected="false">Book Tests</button>
 						<button class="nav-link fs-5" data-bs-toggle="tab" data-bs-target="#reports" aria-selected="false">Test Reports</button>
 						<a class="nav-link text-decoration-none fs-5 text-center mt-auto" href="logout.php"><img src="imgs/icons/box-arrow-right.svg" alt="logout"> Log out</a>
 					</div>
@@ -124,7 +124,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 
 						</div>
 						<div class="tab-pane fade" id="tests">
-							<h2>Add Tests</h2>
+							<h2>Book Tests</h2>
 							<?php
 							$tests=$db->prepare('SELECT * FROM tests');
 							$tests->execute();

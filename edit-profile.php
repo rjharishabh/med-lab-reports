@@ -48,7 +48,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 				<div class="col-md-3">
 					<div class="nav flex-column nav-tabs me-3 position-fixed" role="tablist">
 						<button class="nav-link active fs-5" >Profile</button>
-						<button class="nav-link fs-5 dispToast">Add Test</button>
+						<button class="nav-link fs-5 dispToast">Book Tests</button>
 						<button class="nav-link fs-5 dispToast" >Test Reports</button>
 						<button class="nav-link fs-5 mt-auto dispToast"><img src="imgs/icons/box-arrow-right.svg" alt="logout"> Log out</button>
 					</div>
