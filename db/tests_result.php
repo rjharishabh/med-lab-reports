@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SESSION['tid'])) {
+if (!isset($_SESSION['razorpay_order_id'])) {
 	header('Location:/medical-test-and-report-management-system/dashboard.php');
 	return;
 }
@@ -53,7 +53,7 @@ function test_results($tid) {
 			$value = mt_rand(7000,10500)/100;
 			break;
 		default:
-			$value='Unable to calculate test result';
+			$value='Error';
 			break;
 		}
 		return $value;

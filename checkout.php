@@ -11,17 +11,37 @@ if (!isset($_POST['tid'])) {
 	return;
 }
 
-require_once 'db/connect_db.php';
+require 'vendor/autoload.php';
+require 'db/connect_db.php';
 
-$sql_d='SELECT email, name, age, gender, mobile, address FROM auth,users WHERE auth.id=users.uid and auth.id=:authid';
-$det=$db->prepare($sql_d);
-$det->execute(array(':authid' => $_SESSION['authid']));
-$detail=$det->fetch(PDO::FETCH_ASSOC);
+use Razorpay\Api\Api;
 
-$sql_t='SELECT tid, test_code, test_name, fee FROM tests WHERE tid=:tid';
-$t=$db->prepare($sql_t);
-$t->execute(array(':tid' => $_POST['tid']));
-$test=$t->fetch(PDO::FETCH_ASSOC);
+$keyId = '..........';
+$keySecret = '..........';
+$displayCurrency = 'INR';
+
+$api = new Api($keyId, $keySecret);
+
+$sql = 'SELECT * FROM auth, users, tests WHERE
+	auth.id=users.uid AND tests.tid=:tid AND auth.id=:authid';
+$det = $db->prepare($sql);
+$det->execute(array(
+	':tid'=>$_POST['tid'],
+	':authid' => $_SESSION['authid']
+));
+
+$detail = $det->fetch(PDO::FETCH_ASSOC);
+
+$orderData = [
+	'amount'          => $detail['fee']*100,
+	'currency'        => 'INR',
+	'payment_capture' => 1
+];
+
+$razorpayOrder = $api->order->create($orderData);
+$razorpayOrderId = $razorpayOrder['id'];
+$_SESSION['razorpay_order_id'] = $razorpayOrderId;
+$displayAmount = $amount = $orderData['amount'];
 
 ?>
 
@@ -70,7 +90,7 @@ $test=$t->fetch(PDO::FETCH_ASSOC);
 
 							<div class="row">
 								<div class="col-md-6">
-									Age: <?=htmlentities($detail['age'].' Years'); ?>
+									Age &amp; Gender : <?=htmlentities($detail['age'].' Years'); ?> &amp; <?=htmlentities($detail['gender']); ?>
 								</div>
 								<div class="col-md-6">
 									Mobile: <?=htmlentities($detail['mobile']); ?>
@@ -79,7 +99,7 @@ $test=$t->fetch(PDO::FETCH_ASSOC);
 
 							<div class="row">
 								<div class="col-md-6">
-									Gender: <?=htmlentities($detail['gender']); ?>
+									Order ID: <?=htmlentities($razorpayOrderId); ?>
 								</div>
 								<div class="col-md-6">
 									Date & Time: <?php echo date('Y-m-d h:i:s'); ?>
@@ -97,10 +117,10 @@ $test=$t->fetch(PDO::FETCH_ASSOC);
 								</thead>
 								<tbody>
 									<tr>
-										<td><?=htmlentities($test['tid']); ?></td>
-										<td><?=htmlentities($test['test_code']); ?></td>
-										<td><?=htmlentities($test['test_name']); ?></td>
-										<td><?=htmlentities($test['fee']); ?></td>
+										<td><?=htmlentities($detail['tid']); ?></td>
+										<td><?=htmlentities($detail['test_code']); ?></td>
+										<td><?=htmlentities($detail['test_name']); ?></td>
+										<td><?=htmlentities($detail['fee']); ?></td>
 									</tr>
 									<tr>
 										<th class="text-end" colspan="3">Miscellaneous Charges</th>
@@ -108,18 +128,65 @@ $test=$t->fetch(PDO::FETCH_ASSOC);
 									</tr>
 									<tr>
 										<th class="text-end" colspan="3">Total Payable Amount</th>
-										<td><?=htmlentities($test['fee']); ?></td>
+										<td><?=htmlentities($detail['fee']); ?></td>
 									</tr>
 								</tbody>
 							</table>
 
 							<div class="row">
-								<form action="db/payment-completed.php" method="post">
-									<input type="hidden" name="tid" value="<?php echo $test['tid']; ?>" >
+								<div class="col">
 									<a href="dashboard.php" class="btn btn-danger">Cancel</a>
-									<button type="submit" class="float-end btn btn-primary">Pay &#8377; <?=htmlentities($test['fee']); ?></button>
-								</form>
+								</div>
+								<div class="col">
+									<button id="rzp-button" class="float-end btn btn-primary">Pay &#8377; <?=htmlentities($detail['fee']); ?></button>
+								</div>
 							</div>
+
+							<?php
+							$data = [
+							    "key"               => $keyId,
+							    "amount"            => $amount,
+							    "name"              => $detail['name'],
+							    "description"       => $detail['test_name'],
+							    "image"             => "imgs/icons/logo.png",
+							    "prefill"           => [
+							    "name"              => $detail['name'],
+							    "email"             => $detail['email'],
+							    "contact"           => $detail['mobile'],
+							    ],
+							    "theme"             => [
+							    "color"             => "#82aae5"
+							    ],
+							    "order_id"          => $razorpayOrderId,
+							];
+
+							$json = json_encode($data);
+							 ?>
+
+							 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+							 <form name='razorpayform' action="db/payment-completed.php" method="post">
+								 <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+								 <input type="hidden" name="razorpay_signature"  id="razorpay_signature">
+								 <input type="hidden" name="tid" value="<?=htmlentities($detail['tid']); ?>">
+							 </form>
+
+							 <script>
+							 	var options = <?php echo $json?>;
+
+								 options.handler = function (response) {
+									 document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+									 document.getElementById('razorpay_signature').value = response.razorpay_signature;
+									 document.razorpayform.submit();
+								 };
+
+								 options.theme.image_padding = false;
+								 var rzp = new Razorpay(options);
+
+								 document.getElementById('rzp-button').onclick = function(e) {
+									 rzp.open();
+									 e.preventDefault();
+								 }
+							 </script>
 						</div>
 					</div>
 				</div>
