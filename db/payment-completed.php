@@ -51,7 +51,7 @@ if (empty($_POST['razorpay_payment_id']) === false)
     }
     catch(SignatureVerificationError $e) {
         $success = false;
-        $error = 'Razorpay Error : ' . $e->getMessage();
+        $error = 'Error : ' . $e->getMessage();
     }
 }
 

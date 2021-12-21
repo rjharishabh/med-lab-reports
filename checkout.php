@@ -188,10 +188,58 @@ $displayAmount = $amount = $orderData['amount'];
 									 e.preventDefault();
 								 }
 							 </script>
-						</div>
+
+							 <div class="m-4">
+								 <div class="text-center">
+									 <button class="btn btn-info btn-sm fs-6 text-center" data-bs-toggle="collapse" data-bs-target="#pay-cred">
+										 <span id="show-hide">Show </span>Payment Credentials for Testing
+									 </button>
+								 </div>
+								 <div class="collapse" id="pay-cred">
+									 <h6 class="my-3">Test Card Details</h6>
+									 <table class="table table-bordered">
+										 <thead>
+											 <tr>
+												 <th scope="col">Card Network</th>
+												 <th scope="col">Card Number</th>
+												 <th scope="col">CVV</th>
+												 <th scope="col">Expiry Date</th>
+											 </tr>
+										 </thead>
+										 <tbody>
+											 <tr>
+												 <td>Mastercard</td>
+												 <td>5267 3181 8797 5449</td>
+												 <td>Random CVV</td>
+												 <td>Any future date</td>
+											 </tr>
+											 <tr>
+												 <td>Visa</td>
+												 <td>4111 1111 1111 1111</td>
+												 <td>Random CVV</td>
+												 <td>Any future date</td>
+											 </tr>
+										 </tbody>
+									 </table>
+									 <h6>Test UPI IDs</h6>
+									 <p>For Success flow - success@razorpay</p>
+									 <p>For Failure flow - failure@razorpay</p>
+								 </div>
+							 </div>
+						 </div>
 					</div>
 				</div>
 			</div>
 		</main>
+		<script>
+		var collapse = document.querySelector('#pay-cred');
+		collapse.addEventListener('show.bs.collapse', function () {
+			document.querySelector('#show-hide').textContent = 'Hide ';
+		});
+		collapse.addEventListener('hide.bs.collapse', function () {
+			document.querySelector('#show-hide').textContent = 'Show ';
+		});
+		</script>
+		<script src="js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>

@@ -46,7 +46,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
                       <div class="card-body">
 						  <h5>Sorry <?=htmlentities($row['name']); ?>!</h5>
 						  <br>
-						  <h5>Your Payment is Failed with Payment ID: <?=htmlentities($_SESSION['payment']); ?></h5>
+						  <h5>Your Payment is Failed with <?=htmlentities($_SESSION['payment']); ?></h5>
 							  <img src="imgs/icons/failed.jpg" width="450" height="450" alt="failed-icon">
 							  <a href="dashboard.php" class="btn btn-info my-6">Return to Dashboard</a>
                       </div>
