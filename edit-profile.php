@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['authid'])) {
+if (!isset($_SESSION['authid'])) {
     header('Location:/medical-test-and-report-management-system/');
     return;
 }
@@ -58,7 +58,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 					<div class="tab-content">
 						<div class="tab-pane fade show active" id="profile">
 							<?php
-							if(isset($_SESSION['success'])){
+							if (isset($_SESSION['success'])) {
 								echo ('<div class="alert text-center alert-success alert-dismissible fade show" role="alert">
 								<strong>'.$_SESSION["success"].'</strong><button type="button" class="btn-close"
 								data-bs-dismiss="alert" aria-label="Close"></button></div>');
@@ -66,10 +66,11 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 							}
 							?>
 							<h2>Edit Profile</h2>
+							<h6 class="text-danger">* Required</h6>
 							<form action="db/update-profile.php" method="post">
 								<div class="row my-2">
 									<div class="col-3">
-										<label for="name" class="form-label" required><h5>Full Name <span class="fs-6 text-danger">(Required)</span></h5></label>
+										<label for="name" class="form-label" required><h5>Full Name <span class="text-danger">*</span></h5></label>
 									</div>
 									<div class="col-7">
 										<input type="text" name="name" id="name" class="form-control" required value="<?=htmlentities($row['name'])?>" >
@@ -78,19 +79,19 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 
 								<div class="row my-2">
 									<div class="col-3">
-										<label for="dob" class="form-label"><h5>Date of Birth</h5></label>
+										<label for="dob" class="form-label"><h5>Date of Birth <span class="text-danger">*</span></h5></label>
 									</div>
 									<div class="col-7">
-										<input type="date" name="dob" id="dob" class="form-control" value="<?=htmlentities($row['dob'])?>" >
+										<input type="date" name="dob" id="dob" class="form-control" required value="<?=htmlentities($row['dob'])?>" >
 									</div>
 								</div>
 
 								<div class="row my-2">
 									<div class="col-3">
-										<label for="gender" class="form-label"><h5>Gender</h5></label>
+										<label for="gender" class="form-label"><h5>Gender <span class="text-danger">*</span></h5></label>
 									</div>
 									<div class="col-7">
-										<select class="form-select" id="gender" name="gender" value="<?=htmlentities($row['gender'])?>" >
+										<select class="form-select" id="gender" name="gender" required value="<?=htmlentities($row['gender'])?>" >
 											<option value="1" selected>Male</option>
 											<option value="2">Female</option>
 											<option value="3">Transgender</option>
@@ -100,10 +101,10 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 
 								<div class="row my-2">
 									<div class="col-3">
-										<label for="mobile" class="form-label"><h5>Mobile Number</h5></label>
+										<label for="mobile" class="form-label"><h5>Mobile Number <span class="text-danger">*</span></h5></label>
 									</div>
 									<div class="col-7">
-										<input type="text" name="mobile" id="mobile" maxlength="10" class="form-control" value="<?=htmlentities($row['mobile'])?>" >
+										<input type="text" name="mobile" id="mobile" maxlength="10" class="form-control" required value="<?=htmlentities($row['mobile'])?>" >
 									</div>
 								</div>
 
@@ -118,7 +119,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 
 								<div class="row my-3">
 									<div class="col-md-1 offset-md-9">
-										<button type="submit" class="btn btn-primary btn-block" name="button">Save</button>
+										<button type="submit" class="btn btn-primary btn-block">Save</button>
 									</div>
 								</div>
 							</form>

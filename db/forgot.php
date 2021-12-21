@@ -10,7 +10,7 @@ require '../vendor/autoload.php';
 if (isset($_GET['email'])) {
     $email = $_REQUEST['email'];
 
-	require_once 'connect_db.php';
+	require 'connect_db.php';
 
 	$sql = 'SELECT email FROM auth WHERE email=:email';
 	$forg = $db->prepare($sql);

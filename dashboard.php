@@ -6,6 +6,10 @@ if (!isset($_SESSION['authid'])) {
 	return;
 }
 
+if (isset($_SESSION['payment'])) {
+	unset($_SESSION['payment']);
+}
+
 require 'db/connect_db.php';
 
 $sql='SELECT * FROM auth,users WHERE auth.id=users.uid AND auth.id=:id';
@@ -162,7 +166,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 						<div class="tab-pane fade" id="reports">
 							<h2>Test Reports</h2>
 							<?php
-							$sql='SELECT test_no, date_and_time, test_code, test_name FROM tests_conducted AS tc, tests AS t WHERE tc.user_id=:userid AND t.tid=tc.test_id ORDER BY tc.test_no';
+							$sql='SELECT payment_id, date_and_time, test_code, test_name FROM tests_conducted AS tc, tests AS t WHERE tc.user_id=:userid AND t.tid=tc.test_id ORDER BY tc.test_no';
 							$tests=$db->prepare($sql);
 							$tests->execute(array(':userid' => $_SESSION['authid']));
 							$tests_row=$tests->fetchall(PDO::FETCH_ASSOC);
@@ -171,7 +175,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 								<table class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th>Test No.</th>
+											<th>Payment ID</th>
 											<th>Test Code</th>
 											<th class="text-center">Test Name</th>
 											<th>Date &amp; Time</th>
@@ -183,12 +187,12 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 										<?php
 										foreach ($tests_row as $key => $value) {
 											echo ("<tr>
-											<td>$value[test_no]</td>
+											<td>$value[payment_id]</td>
 											<td>$value[test_code]</td>
 											<td>$value[test_name]</td>
 											<td>$value[date_and_time]</td>
 											<form method='post' action='view-result.php' target='_blank'>
-											<input type='hidden' name='tid' value='$value[test_no]'>
+											<input type='hidden' name='payId' value='$value[payment_id]'>
 											<td class='text-center'><button type='submit' class='btn btn-sm btn-light'><img src='imgs/icons/eye-fill.svg'></button></td>
 											<td class='text-center'><button type='submit' class='btn btn-sm btn-light' formaction='invoice.php' formmethod='post'><img src='imgs/icons/eye-fill.svg'></button></td>
 											</form></tr>");

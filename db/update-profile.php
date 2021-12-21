@@ -6,7 +6,7 @@ if (!isset($_POST['name'])) {
 	return;
 }
 
-require_once 'connect_db.php';
+require 'connect_db.php';
 
 $age=0;
 

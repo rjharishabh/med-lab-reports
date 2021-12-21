@@ -91,7 +91,7 @@ if (isset($_SESSION['authid'])) {
 
                             <div class="tab-pane fade" id="register">
                                 <h2 class="text-center m-3">Register</h2>
-                                <form action="db/register.php" method="post">
+                                <form action="db/register.php" method="post" onsubmit="return validate(this)">
                                     <div class="row m-3">
                                         <div class="col-4">
                                             <label for="email" class="form-label"><h5>Email</h5></label>
@@ -131,6 +131,17 @@ if (isset($_SESSION['authid'])) {
 				</div>
 			</div>
         </main>
+		<script>
+			function validate(form) {
+				if (form.email.value.indexOf('.') > 0) {
+					return true;
+				}
+				else {
+					alert('Please enter a valid email.');
+					return false;
+				}
+		}
+		</script>
         <script src="js/script.js"></script>
         <script src="js/bootstrap.bundle.min.js" ></script>
     </body>

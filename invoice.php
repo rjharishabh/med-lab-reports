@@ -1,36 +1,26 @@
 <?php
 session_start();
 
-require_once 'db/connect_db.php';
-require 'vendor/autoload.php';
-
-use Dompdf\Dompdf;
-
-if (!isset($_SESSION['tid']) && !isset($_POST['tid']) ) {
+if (!isset($_POST['payId'])) {
 	header('Location:/medical-test-and-report-management-system/dashboard.php');
 	return;
 }
 
-$sql_d='SELECT email, name, age, gender, mobile, address FROM auth,users WHERE auth.id=users.uid and auth.id=:authid';
-$det=$db->prepare($sql_d);
-$det->execute(array(':authid' => $_SESSION['authid']));
-$detail=$det->fetch(PDO::FETCH_ASSOC);
+require 'db/connect_db.php';
+require 'vendor/autoload.php';
 
+use Dompdf\Dompdf;
 
-if (isset($_SESSION['tid'])) {
-	$sql_t='SELECT tid, test_code, test_name, fee FROM tests WHERE tid=:tid';
-	$t=$db->prepare($sql_t);
-	$t->execute(array(':tid' => $_SESSION['tid']));
-}
-elseif (isset($_POST['tid'])) {
-	$sql_t='SELECT tid, test_code, test_name, fee FROM tests AS t, tests_conducted AS tc WHERE tc.test_id=t.tid AND tc.test_no=:tid';
-	$t=$db->prepare($sql_t);
-	$t->execute(array(':tid' => $_POST['tid']));
-}
+$sql = 'SELECT * FROM auth, users, tests, tests_conducted WHERE
+	auth.id=users.uid AND tests.tid=tests_conducted.test_id AND
+	tests_conducted.payment_id=:pay_id AND auth.id=:authid';
+$det = $db->prepare($sql);
+$det->execute(array(
+	':pay_id'=>$_POST['payId'],
+	':authid' => $_SESSION['authid']
+));
 
-$test=$t->fetch(PDO::FETCH_ASSOC);
-
-$date=date('Y-m-d h:i:s');
+$detail = $det->fetch(PDO::FETCH_ASSOC);
 
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
@@ -63,12 +53,15 @@ $html = $html . "
 			<td>Email: $detail[email]</td>
 		</tr>
 		<tr>
-			<td>Age: $detail[age]" . ' Years' . "</td>
-			<td>Mobile: $detail[mobile]</td>
+			<td>Age & Gender : $detail[age] Years & $detail[gender]
+			<td>Date & Time: $detail[date_and_time]</td>
 		</tr>
 		<tr>
-			<td>Gender: $detail[gender]</td>
-			<td>Date & Time: $date</td>
+			<td>Mobile: $detail[mobile]</td>
+			<td>Order ID: $detail[order_id]</td>
+		</tr>
+		<tr>
+			<td>Payment ID: $detail[payment_id]</td>
 		</tr>
 	</tbody>
 </table>
@@ -84,10 +77,10 @@ $html = $html . "
 	</thead>
 	<tbody>
 		<tr>
-			<td>$test[tid]</td>
-			<td>$test[test_code]</td>
-			<td>$test[test_name]</td>
-			<td>$test[fee]</td>
+			<td>$detail[tid]</td>
+			<td>$detail[test_code]</td>
+			<td>$detail[test_name]</td>
+			<td>$detail[fee]</td>
 		</tr>
 		<tr>
 			<th class='text-right' colspan='3'>Miscellaneous Charges</th>
@@ -95,7 +88,7 @@ $html = $html . "
 		</tr>
 		<tr>
 			<th class='text-right' colspan='3'>Total Amount</th>
-			<td>$test[fee]</td>
+			<td>$detail[fee]</td>
 		</tr>
 	</tbody>
 </table>";

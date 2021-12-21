@@ -143,12 +143,13 @@ $displayAmount = $amount = $orderData['amount'];
 							</div>
 
 							<?php
+							$image = base64_encode(file_get_contents('imgs/icons/logo.png'));
 							$data = [
 							    "key"               => $keyId,
 							    "amount"            => $amount,
 							    "name"              => $detail['name'],
 							    "description"       => $detail['test_name'],
-							    "image"             => "imgs/icons/logo.png",
+							    "image"             => "data:image/png;base64,$image",
 							    "prefill"           => [
 							    "name"              => $detail['name'],
 							    "email"             => $detail['email'],

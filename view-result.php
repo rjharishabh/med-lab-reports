@@ -1,21 +1,22 @@
 <?php
 session_start();
 
-require_once 'db/connect_db.php';
-require 'vendor/autoload.php';
-
-use Dompdf\Dompdf;
-
-if (!isset($_POST['tid'])) {
+if (!isset($_POST['payId'])) {
 	header('Location:/medical-test-and-report-management-system/dashboard.php');
 	return;
 }
 
+require 'db/connect_db.php';
+require 'vendor/autoload.php';
+
+use Dompdf\Dompdf;
+
 $sql = 'SELECT * FROM auth, users, tests, tests_conducted WHERE
 	auth.id=users.uid AND tests.tid=tests_conducted.test_id AND
-	tests_conducted.test_no=:test_no AND auth.id=:authid';
+	tests_conducted.payment_id=:pay_id AND auth.id=:authid';
 $det = $db->prepare($sql);
-$det->execute(array(':test_no'=>$_POST['tid'],
+$det->execute(array(
+	':pay_id'=>$_POST['payId'],
 	':authid' => $_SESSION['authid']));
 
 $detail = $det->fetch(PDO::FETCH_ASSOC);
@@ -48,16 +49,16 @@ $html = $html . "
 			<td>Email: $detail[email]</td>
 		</tr>
 		<tr>
-			<td>Test No.: $detail[test_no]</td>
-			<td>Age: $detail[age]" . ' Years' . "</td>
-		</tr>
-		<tr>
-			<td>Gender: $detail[gender]</td>
+			<td>Age & Gender : $detail[age] Years & $detail[gender]
 			<td>Date & Time: $detail[date_and_time]</td>
 		</tr>
 		<tr>
 			<td>Mobile: $detail[mobile]</td>
+			<td>Order ID: $detail[order_id]</td>
+		</tr>
+		<tr>
 			<td>Report Status: Final</td>
+			<td>Payment ID: $detail[payment_id]</td>
 		</tr>
 	</tbody>
 </table>
