@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_POST['name'])) {
-	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	header('Location:/med-lab-reports/dashboard.php');
 	return;
 }
 
@@ -30,7 +30,7 @@ $query->execute(array(
 	':uid'=>$_SESSION['authid']
 ));
 
-header('Location:/medical-test-and-report-management-system/dashboard.php');
+header('Location:/med-lab-reports/dashboard.php');
 return;
 
 ?>

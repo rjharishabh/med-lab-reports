@@ -15,11 +15,11 @@ $row = $login->fetch(PDO::FETCH_ASSOC);
 
 if ($row === false) {
     $_SESSION['error'] = "Incorrect Email or Password";
-    header('Location:/medical-test-and-report-management-system/');
+    header('Location:/med-lab-reports/');
     return;
 }
 else {
 	$_SESSION['authid'] = $row['id'];
-    header('Location:/medical-test-and-report-management-system/dashboard.php');
+    header('Location:/med-lab-reports/dashboard.php');
     return;
 }

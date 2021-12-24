@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_SESSION['razorpay_order_id'])) {
-	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	header('Location:/med-lab-reports/dashboard.php');
 	return;
 }
 

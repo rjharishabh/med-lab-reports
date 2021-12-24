@@ -18,17 +18,17 @@ if(isset($_POST['newpass']) && isset($_POST['confpass'])) {
 
 		$_SESSION['success'] = "Password successfully changed. <br>Please login with the new password.";
 		unset($_SESSION['email']);
-		header('Location:/medical-test-and-report-management-system/');
+		header('Location:/med-lab-reports/');
 		return;
 	}
 	else {
 		$_SESSION['error'] = "Password and confirm password should be same <br>Please try again.";
-		header('Location:/medical-test-and-report-management-system/change-password.php');
+		header('Location:/med-lab-reports/change-password.php');
 		return;
 	}
 
 } else {
-	header('Location:/medical-test-and-report-management-system/');
+	header('Location:/med-lab-reports/');
 	return;
 }
 

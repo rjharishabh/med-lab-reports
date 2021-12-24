@@ -34,17 +34,17 @@ if($row === false){
 		$query->execute(array(':uid'=>$_SESSION['authid']));
 
 		$_SESSION['success'] = "Please complete your profile";
-		header('Location:/medical-test-and-report-management-system/edit-profile.php');
+		header('Location:/med-lab-reports/edit-profile.php');
 		return;
     }
     else {
         $_SESSION['error'] = "Password and confirm password should be same <br>Please try to register again.";
-        header('Location:/medical-test-and-report-management-system/');
+        header('Location:/med-lab-reports/');
         return;
     }
 }
 else {
     $_SESSION['error'] = "Email already exists <br>Please register with different email.";
-    header('Location:/medical-test-and-report-management-system/');
+    header('Location:/med-lab-reports/');
     return;
 }

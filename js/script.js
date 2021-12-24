@@ -9,7 +9,7 @@ if (document.getElementById('otpbtn')) {
             xhttp.onload = function() {
 				// console.log(this.responseText);
 				if (this.responseText === 'Email not found') {
-					window.location='/medical-test-and-report-management-system/forgot-password.php';
+					window.location='/med-lab-reports/forgot-password.php';
 				} else if (this.responseText === 'OTP could not be sent.') {
 					console.log('OTP could not be sent.');
 					document.getElementById('resText').innerHTML = this.responseText + '<br> Get OTP again.';

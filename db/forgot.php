@@ -50,7 +50,7 @@ if (isset($_GET['email'])) {
 		    //Content
 		    $mail->isHTML(true);
 		    $mail->Subject = 'OTP for Password Change';
-		    $mail->Body    = 'Hi,<br>Please use <strong>' . $otp . '</strong> as an OTP to change the password on medical-test-and-report-management-system website.' .
+		    $mail->Body    = 'Hi,<br>Please use <strong>' . $otp . '</strong> as an OTP to change the password on med-lab-reports website.' .
 			'<br>If you have not initiated the password change request, then please ignore this email.' .
 			'<br><br>Thank you<br>Rishabh Ranjan Jha<br>Developer of the website';
 
@@ -66,18 +66,18 @@ if (isset($_GET['email'])) {
 
 else if (isset($_POST['otp'])) {
     if($_POST['otp'] === $_SESSION['otp']) {
-        header('Location:/medical-test-and-report-management-system/change-password.php');
+        header('Location:/med-lab-reports/change-password.php');
 		return;
     }
     else {
 		unset($_SESSION['otp']);
 		$_SESSION['error'] = 'Incorrect OTP. Please try again.';
-        header('Location:/medical-test-and-report-management-system/forgot-password.php');
+        header('Location:/med-lab-reports/forgot-password.php');
 		return;
     }
 }
 
 else {
-	header('Location:/medical-test-and-report-management-system/');
+	header('Location:/med-lab-reports/');
 	return;
 }

@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['authid'])) {
-	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	header('Location:/med-lab-reports/dashboard.php');
 	return;
 }
 
@@ -31,10 +31,10 @@ if (isset($_SESSION['authid'])) {
 					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
 				</div>
 				<div class="col-6">
-					<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+					<h3 class="text-center font-monospace">Med Lab Reports</h3>
 				</div>
 			</div>
-            <div class="row m-3">
+			<div class="row m-3">
 				<div class="col-md-6 offset-md-3">
                     <div class="card border-primary text-center">
                       <div class="card-body">

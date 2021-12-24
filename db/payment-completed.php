@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_POST['razorpay_payment_id'])) {
-	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	header('Location:/med-lab-reports/dashboard.php');
 	return;
 }
 

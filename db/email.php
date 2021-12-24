@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 if (!isset($_SESSION['authid'])) {
-	header('Location:/medical-test-and-report-management-system/');
+	header('Location:/med-lab-reports/');
 	return;
 }
 

@@ -4,7 +4,7 @@ session_start();
 use Dompdf\Dompdf;
 
 if (!isset($_SESSION['authid'])) {
-	header('Location:/medical-test-and-report-management-system/');
+	header('Location:/med-lab-reports/');
 	return;
 }
 
@@ -53,7 +53,7 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 	</style>';
 
 	$html = $html . "
-	<h2 class='text-center'>Medical Test and Report Management System</h2>
+	<h2 class='text-center'>Med Lab Reports</h2>
 	<h2 class='text-center'>Invoice</h2><br>
 	<table>
 		<tbody>
@@ -128,7 +128,7 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 	}
 }
 else {
-	header('Location:/medical-test-and-report-management-system/dashboard.php');
+	header('Location:/med-lab-reports/dashboard.php');
 	return;
 }
 

@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['payment'])) {
-	header('Location:/medical-test-and-report-management-system/');
+	header('Location:/med-lab-reports/');
 	return;
 }
 
@@ -38,10 +38,10 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
 				</div>
 				<div class="col-6">
-					<h3 class="text-center font-monospace">Medical Test and Report Management System</h3>
+					<h3 class="text-center font-monospace">Med Lab Reports</h3>
 				</div>
 			</div>
-            <div class="row m-3">
+			<div class="row m-3">
 				<div class="col-md-6 offset-md-3">
                     <div class="card text-center">
                       <div class="card-body">

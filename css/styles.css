@@ -1,12 +1,12 @@
 #otp-block, #resText {
     display: none;
 }
-.position-fixed .nav-link.active{
+.position-fixed .nav-link.active {
 	background-color: #20c997 !important;
 	color:#fff !important;
 }
-position-fixed .nav-link:not(.active):hover{
-	border-color: #198754;
+.position-fixed .nav-link:not(.active):hover {
+	border-color: #198754 !important;
 }
 .nav-tabs .nav-link  {
 	margin: 0.25rem;
@@ -18,15 +18,15 @@ position-fixed .nav-link:not(.active):hover{
     border: 2px solid #dee2e6 !important;
 	background-color: #eff0f1 !important;
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width:10px;
   background-color: #f7f7f7;
   height: 5px;
 }
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color:#dee2e6;
   border-radius: 100px;
 }
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
   background-color:#0dcaf0;
 }
