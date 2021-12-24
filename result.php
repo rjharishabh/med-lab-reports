@@ -26,20 +26,19 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 	$det = $db->prepare($sql);
 	$det->execute(array(
 		':pay_id'=>$payId,
-		':authid' => $_SESSION['authid']
-	));
+		':authid' => $_SESSION['authid']));
 
 	$detail = $det->fetch(PDO::FETCH_ASSOC);
 
 	// instantiate and use the dompdf class
 	$dompdf = new Dompdf();
 
-	$html='<title>Invoice</title>
+	$html = '<title>Test Result</title>
 	<style>
 	table {
 		width:100%;
 	}
-	.table,.table th, .table td {
+	.table,.table thead {
 	  border: 1px solid black;
 	  line-height: 30px;
 	  border-collapse: collapse;
@@ -47,14 +46,22 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 	.text-center {
 		text-align:center !important;
 	}
-	.text-right {
-		text-align:right !important;
+	.disp {
+		display: inline-block;
+		margin-left: 385px;
 	}
 	</style>';
 
+	$image = base64_encode(file_get_contents('imgs/icons/logo.png'));
+
 	$html = $html . "
+	<img src='data:image/png;base64,$image' width='100' height='100'>
+	<span class='disp'>
 	<h2 class='text-center'>Med Lab Reports</h2>
-	<h2 class='text-center'>Invoice</h2><br>
+	<a href='http://med-lab-reports.great-site.net'>http://med-lab-reports.great-site.net</a>
+	</span>
+	<hr>
+	<h2 class='text-center'>Test Result</h2><br>
 	<table>
 		<tbody>
 			<tr>
@@ -70,6 +77,7 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 				<td>Order ID: $detail[order_id]</td>
 			</tr>
 			<tr>
+				<td>Report Status: Final</td>
 				<td>Payment ID: $detail[payment_id]</td>
 			</tr>
 		</tbody>
@@ -78,26 +86,20 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 	<table class='table'>
 		<thead>
 			<tr>
-				<th>Test Id</th>
 				<th>Test Code</th>
 				<th>Test Name</th>
-				<th>Amount (Rs.)</th>
+				<th>Results</th>
+				<th>Units</th>
+				<th>Bio. Ref. Interval</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class='text-center'>$detail[tid]</td>
 				<td class='text-center'>$detail[test_code]</td>
 				<td class='text-center'>$detail[test_name]</td>
-				<td>$detail[fee]</td>
-			</tr>
-			<tr>
-				<th class='text-right' colspan='3'>Miscellaneous Charges</th>
-				<td>0</td>
-			</tr>
-			<tr>
-				<th class='text-right' colspan='3'>Total Amount</th>
-				<td>$detail[fee]</td>
+				<td class='text-center'>$detail[results]</td>
+				<td class='text-center'>$detail[units]</td>
+				<td class='text-center'>$detail[bio_ref_interval]</td>
 			</tr>
 		</tbody>
 	</table>";
@@ -107,29 +109,17 @@ if (isset($_POST['payId']) || isset($_GET['payId'])) {
 	// Render the HTML as PDF
 	$dompdf->render();
 
-	$canvas = $dompdf->getCanvas();
-	$w = $canvas->get_width();
-	$h = $canvas->get_height();
-	$imageURL = 'imgs/icons/paid.jpg';
-	$imgWidth = 500;
-	$imgHeight = 250;
-	$canvas->set_opacity(.1);
-	$x = (($w-$imgWidth)/2);
-	$y = (($h-$imgHeight)/3);
-	$canvas->image($imageURL, $x, $y, $imgWidth, $imgHeight,$resolution = "normal");
-
 	if (isset($_GET['payId'])) {
 		$data = $dompdf->output();
 		require 'db/email.php';
-		email($detail['email'], $detail['name'], $detail['test_name'], 2, $data);
+		email($detail['email'], $detail['name'], $detail['test_name'], 3, $data);
 	}
 	else if (isset($_POST['payId'])) {
-		$dompdf->stream('invoice.pdf', array('Attachment'=>0));
+		$dompdf->stream('test_result.pdf', array('Attachment'=>0));
 	}
 }
 else {
 	header('Location:/med-lab-reports/dashboard.php');
 	return;
 }
-
 ?>

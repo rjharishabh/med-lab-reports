@@ -37,11 +37,11 @@ function email($to, $name, $testName, $for, $data) {
 				fwrite($handle, $data);
 				fclose($handle);
 
-				$mail->Subject = 'Invoice for ' . $testName . ' Test';
+				$mail->Subject = 'Receipt for ' . $testName . ' Test';
 				$mail->Body    = 'Hi <strong>' . $name . '</strong>,<br>You have successfully booked the <strong>' .
-				$testName . '</strong> test.<br>Please find the invoice attached in this email.' .
+				$testName . '</strong> test.<br>Please find the receipt attached in this email.' .
 				'<br><br>This is a system generated email, so please do not reply to this email.';
-				$mail->addAttachment($filename, 'invoice.pdf');
+				$mail->addAttachment($filename, 'receipt.pdf');
 				$mail->send();
 
 				unlink($filename);

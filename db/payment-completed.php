@@ -57,7 +57,7 @@ if (empty($_POST['razorpay_payment_id']) === false)
 
 if ($success === true) {
 	$_SESSION['payment'] = $_POST['razorpay_payment_id'];
-	header('Location:../invoice.php?payId='.$_POST['razorpay_payment_id']);
+	header('Location:../receipt.php?payId='.$_POST['razorpay_payment_id']);
 	return;
 }
 else {

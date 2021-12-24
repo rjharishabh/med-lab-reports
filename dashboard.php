@@ -180,7 +180,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 											<th class="text-center">Test Name</th>
 											<th>Date &amp; Time</th>
 											<th>View Result</th>
-											<th>View Invoice</th>
+											<th>View Receipt</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -191,10 +191,10 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 											<td>$value[test_code]</td>
 											<td>$value[test_name]</td>
 											<td>$value[date_and_time]</td>
-											<form method='post' action='view-result.php' target='_blank'>
+											<form method='post' action='result.php' target='_blank'>
 											<input type='hidden' name='payId' value='$value[payment_id]'>
 											<td class='text-center'><button type='submit' class='btn btn-sm btn-light'><img src='imgs/icons/eye-fill.svg'></button></td>
-											<td class='text-center'><button type='submit' class='btn btn-sm btn-light' formaction='invoice.php' formmethod='post'><img src='imgs/icons/eye-fill.svg'></button></td>
+											<td class='text-center'><button type='submit' class='btn btn-sm btn-light' formaction='receipt.php' formmethod='post'><img src='imgs/icons/eye-fill.svg'></button></td>
 											</form></tr>");
 										}
 										?>
