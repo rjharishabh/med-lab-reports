@@ -48,7 +48,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 						  <br>
 						  <h5>Your Booking is Confirmed with Payment ID: <?=htmlentities($_SESSION['payment']); ?></h5>
 							  <img src="imgs/icons/done.jpg" width="450" height="450" alt="done-icon">
-							  <a href="dashboard.php" class="float-start btn btn-success my-6">Return to Dashboard</a>
+							  <a href="view-result.php?payId=<?php echo $_SESSION['payment']; ?>" class="float-start btn btn-success my-6">Return to Dashboard</a>
 							  <form action="invoice.php" target="_blank" method="post">
 							  	<input type="hidden" name="payId" value="<?=htmlentities($_SESSION['payment']); ?>">
 								<button type="submit" class="float-end btn btn-info my-6">View Invoice</button>
@@ -59,7 +59,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
 			</div>
         </main>
 		<?php
-		header('refresh:15;url=dashboard.php');
+		header('refresh:15;url=view-result.php?payId='.$_SESSION['payment']);
 		?>
     </body>
 </html>

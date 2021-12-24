@@ -1,2 +1,2 @@
-ErrorDocument 403 http://localhost//medical-test-and-report-management-system/error/403.php
-ErrorDocument 404 http://localhost//medical-test-and-report-management-system/error/404.php
+ErrorDocument 403 http://localhost/medical-test-and-report-management-system/error/403.php
+ErrorDocument 404 http://localhost/medical-test-and-report-management-system/error/404.php
