@@ -13,6 +13,9 @@ $age=0;
 if ($_POST['dob'] !== '') {
 	$year = explode('-',$_POST['dob']);
 	$age = date('Y') - $year[0];
+	if ($age < 0) {
+		$age = 0;
+	}
 }
 
 $sql = "UPDATE users SET name=:name, dob=:dob, age=:age, gender=:gender, mobile=:mobile, address=:address WHERE uid=:uid";

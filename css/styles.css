@@ -1,11 +1,11 @@
 #otp-block, #resText {
     display: none;
 }
-.nav-link.active{
+.position-fixed .nav-link.active{
 	background-color: #20c997 !important;
 	color:#fff !important;
 }
-.nav-link:not(.active):hover{
+position-fixed .nav-link:not(.active):hover{
 	border-color: #198754;
 }
 .nav-tabs .nav-link  {
@@ -17,4 +17,16 @@
 	width: 290px;
     border: 2px solid #dee2e6 !important;
 	background-color: #eff0f1 !important;
+}
+::-webkit-scrollbar{
+  width:10px;
+  background-color: #f7f7f7;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb{
+  background-color:#dee2e6;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color:#0dcaf0;
 }
