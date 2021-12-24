@@ -26,12 +26,16 @@ if (!isset($_SESSION['email'])) {
     <body>
         <main class="container">
 			<div class="row m-3">
-				<div class="col-3">
-					<a href="https://med-lab-reports.great-site.net/">
-					<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
-				</div>
-				<div class="col-6">
-					<h3 class="text-center font-monospace">Med Lab Reports</h3>
+				<div class="col-md-6 offset-md-3">
+					<div class="row">
+						<div class="col-1">
+							<a href="https://med-lab-reports.great-site.net/">
+							<img src="imgs/icons/logo.png" width="40" height="40" alt="logo"></a>
+						</div>
+						<div class="col">
+							<h3 class="text-center font-monospace">Med Lab Reports</h3>
+						</div>
+					</div>
 				</div>
 			</div>
             <div class="row m-3">
