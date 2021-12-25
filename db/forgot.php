@@ -1,18 +1,12 @@
 <?php
 session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require '../vendor/autoload.php';
-
 if (isset($_GET['email'])) {
     $email = $_REQUEST['email'];
 
 	require 'connect_db.php';
 
-	$sql = 'SELECT email FROM auth WHERE email=:email';
+	$sql = 'SELECT email, name FROM auth, users WHERE email=:email AND auth.id=users.uid';
 	$forg = $db->prepare($sql);
 	$forg->execute(array(
 	    ':email' => $email
@@ -32,51 +26,37 @@ if (isset($_GET['email'])) {
 
 	    $_SESSION['otp'] = $otp;
 
-		$mail = new PHPMailer(true);
+		require 'email.php';
 
-		try {
-		    $mail->isSMTP();
-			$mail->Host       = 'smtp.gmail.com';
-			$mail->SMTPAuth   = true;
-			$mail->Username   = 'mail@gmail.com';
-			$mail->Password   = 'gmailpassword';
-			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-			$mail->Port       = 465;
+		$res = email($email, $row['name'], '', 4, $otp);
+		echo $res;
 
-		    //Recipients
-			$mail->setFrom('mail@gmail.com', 'Rishabh Ranjan Jha');
-			$mail->addAddress($email);
-
-		    //Content
-		    $mail->isHTML(true);
-		    $mail->Subject = 'OTP for Password Change';
-		    $mail->Body    = 'Hi,<br>Please use <strong>' . $otp . '</strong> as an OTP to change the password on med-lab-reports website.' .
-			'<br>If you have not initiated the password change request, then please ignore this email.' .
-			'<br><br>Thank you<br>Rishabh Ranjan Jha<br>Developer of the website';
-
-		    $mail->send();
-		    echo 'Please enter the 6 digit OTP you have received on ' . $email;
-		} catch (Exception $e) {
-		    echo "OTP could not be sent.";
-		}
 		$_SESSION['email'] = $email;
 	}
 
 }
-
 else if (isset($_POST['otp'])) {
     if($_POST['otp'] === $_SESSION['otp']) {
-        header('Location:/med-lab-reports/change-password.php');
-		return;
+		if ($_POST['email'] === $_SESSION['email']) {
+			header('Location:/med-lab-reports/change-password.php');
+			return;
+		}
+		else {
+			unset($_SESSION['otp']);
+			unset($_SESSION['email']);
+			$_SESSION['error'] = "Email is not correct. <br>Please try to register again.";
+			header('Location:/med-lab-reports/');
+			return;
+		}
     }
     else {
+		unset($_SESSION['email']);
 		unset($_SESSION['otp']);
 		$_SESSION['error'] = 'Incorrect OTP. Please try again.';
         header('Location:/med-lab-reports/forgot-password.php');
 		return;
     }
 }
-
 else {
 	header('Location:/med-lab-reports/');
 	return;

@@ -74,7 +74,7 @@ if (!isset($_SESSION['email'])) {
 									  <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="confpassword">
 								  </div>
                               </div>
-                                  <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
+                                  <button type="submit" class="btn btn-info btn-lg">Confirm</button>
                           </form>
                       </div>
                     </div>

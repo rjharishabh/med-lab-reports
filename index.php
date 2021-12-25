@@ -90,7 +90,7 @@ if (isset($_SESSION['authid'])) {
                                     <div class="row">
                                         <a href="forgot-password.php" class="link-primary offset-9 col-3 text-end text-decoration-none">Forgot Password</a>
                                     </div>
-                                    <button type="submit" class="btn btn-info btn-lg" name="button">Login</button>
+                                    <button type="submit" class="btn btn-info btn-lg">Login</button>
                                 </form>
                           </div>
 
@@ -127,7 +127,21 @@ if (isset($_SESSION['authid'])) {
                                             <img id="login-eye-cpass" src="imgs/icons/eye-slash-fill.svg" alt="confpassword">
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-info btn-lg" name="button">Continue</button>
+									<button type="button" class="btn btn-info" id="otpreg">Get OTP on Email</button>
+									<div class="row m-3">
+										<p id="resText" class="fs-5 text-primary"></p>
+									</div>
+									<div id="otp-block">
+	                                    <div class="row m-3">
+	                                        <div class="col-4">
+	                                            <label for="otp" class="form-label"><h5>Enter OTP</h5></label>
+	                                        </div>
+	                                        <div class="col-7">
+	                                            <input type="text" name="otp" id="otp" class="form-control" required placeholder="123456">
+	                                        </div>
+	                                    </div>
+	                                    <button type="submit" class="btn btn-info btn-lg">Register</button>
+	                                </div>
                                 </form>
                           </div>
                           </div>

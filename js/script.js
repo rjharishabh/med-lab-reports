@@ -7,7 +7,6 @@ if (document.getElementById('otpbtn')) {
         else {
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
-				// console.log(this.responseText);
 				if (this.responseText === 'Email not found') {
 					window.location='/med-lab-reports/forgot-password.php';
 				} else if (this.responseText === 'OTP could not be sent.') {
@@ -22,6 +21,34 @@ if (document.getElementById('otpbtn')) {
 				}
             }
            xhttp.open("POST", "db/forgot.php?email="+email, true);
+           xhttp.send();
+        }
+    });
+}
+
+if (document.getElementById('otpreg')) {
+    document.getElementById('otpreg').addEventListener('click',()=>{
+        const email = document.getElementById("email").value;
+        if (email === '' || email.indexOf('@')===-1) {
+            alert('Please enter a valid email.')
+        }
+        else {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+				if (this.responseText === 'Email already exists') {
+					window.location='/med-lab-reports/';
+				} else if (this.responseText === 'OTP could not be sent.') {
+					console.log('OTP could not be sent.');
+					document.getElementById('resText').innerHTML = this.responseText + '<br> Get OTP again.';
+					document.getElementById('resText').style.display='block';
+				} else {
+					console.log('OTP sent successfully');
+					document.getElementById('resText').innerHTML = this.responseText;
+					document.getElementById('resText').style.display='block';
+					document.getElementById('otp-block').style.display='block';
+				}
+            }
+           xhttp.open("POST", "db/register.php?email="+email, true);
            xhttp.send();
         }
     });
@@ -52,7 +79,6 @@ if(document.querySelector('#view-password-reg')) {
             p.removeAttribute('src');
             p.setAttribute('src','imgs/icons/eye-fill.svg');
             pass.type='text';
-			console.log('hi');
         }
         else if(pass.type==='text') {
             p.removeAttribute('src');

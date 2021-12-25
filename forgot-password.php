@@ -57,7 +57,7 @@ session_start();
                                       <input type="email" name="email" id="email" class="form-control" required placeholder="user@example.com">
                                   </div>
                               </div>
-                              <button type="button" class="btn btn-primary" id="otpbtn">Get OTP on Email</button>
+                              <button type="button" class="btn btn-info" id="otpbtn">Get OTP on Email</button>
 							  <div class="row m-3">
 								  <p id="resText" class="fs-5 text-primary"></p>
 							  </div>
@@ -70,7 +70,7 @@ session_start();
                                           <input type="text" name="otp" id="otp" class="form-control" required placeholder="123456">
                                       </div>
                                   </div>
-                                  <button type="submit" class="btn btn-primary btn-lg" id="otpbtn">Confirm</button>
+                                  <button type="submit" class="btn btn-info btn-lg">Confirm</button>
                               </div>
                           </div>
                       </form>
