@@ -21,7 +21,7 @@ if (isset($_SESSION['authid'])) {
     	<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png">
     	<link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
     	<link rel="manifest" href="site.webmanifest">
-    	<title>Medical Test & Report Management System</title>
+    	<title>Med Lab Reports</title>
     </head>
     <body>
         <main class="container">
