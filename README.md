@@ -15,7 +15,7 @@ You will need:
 ### Steps to setup the local environment:
 * Clone the repository:
 ```
-git@github.com:rjharishabh/med-lab-reports.git
+git clone git@github.com:rjharishabh/med-lab-reports.git
 ```
 
 * Go to the med-lab-reports folder:
