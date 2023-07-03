@@ -309,16 +309,16 @@
         },
         {
             "name": "razorpay/razorpay",
-            "version": "2.8.5",
+            "version": "2.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/razorpay/razorpay-php.git",
-                "reference": "31027cfb689b9480d67419dbec7c203097e9d9ac"
+                "reference": "c151dadbb3d0a64d92574e9789b970196e629cac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/razorpay/razorpay-php/zipball/31027cfb689b9480d67419dbec7c203097e9d9ac",
-                "reference": "31027cfb689b9480d67419dbec7c203097e9d9ac",
+                "url": "https://api.github.com/repos/razorpay/razorpay-php/zipball/c151dadbb3d0a64d92574e9789b970196e629cac",
+                "reference": "c151dadbb3d0a64d92574e9789b970196e629cac",
                 "shasum": ""
             },
             "require": {
@@ -370,20 +370,20 @@
                 "issues": "https://github.com/Razorpay/razorpay-php/issues",
                 "source": "https://github.com/Razorpay/razorpay-php"
             },
-            "time": "2022-10-19T07:41:27+00:00"
+            "time": "2023-06-16T10:31:14+00:00"
         },
         {
             "name": "rmccue/requests",
-            "version": "v2.0.5",
+            "version": "v2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/Requests.git",
-                "reference": "b717f1d2f4ef7992ec0c127747ed8b7e170c2f49"
+                "reference": "e14a6f4e7438d3f8da3f2657759e6367b906ee23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/Requests/zipball/b717f1d2f4ef7992ec0c127747ed8b7e170c2f49",
-                "reference": "b717f1d2f4ef7992ec0c127747ed8b7e170c2f49",
+                "url": "https://api.github.com/repos/WordPress/Requests/zipball/e14a6f4e7438d3f8da3f2657759e6367b906ee23",
+                "reference": "e14a6f4e7438d3f8da3f2657759e6367b906ee23",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +451,7 @@
                 "issues": "https://github.com/WordPress/Requests/issues",
                 "source": "https://github.com/WordPress/Requests"
             },
-            "time": "2022-10-11T08:15:28+00:00"
+            "time": "2023-06-02T07:35:42+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
